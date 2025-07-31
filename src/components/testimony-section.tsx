@@ -106,9 +106,9 @@ const TestimonySection = () => {
   const testimonialColumns = splitIntoCustomColumns(testimonials, columnPattern);
 
   return (
-    <div className=" py-12 md:py-24 md:mx-28">
+    <div className="py-12 md:py-24 mx-4 md:mx-28">
       {/* Header */}
-      <div className="text-center mb-12">
+      <div className="text-left md:text-center mb-6 md:mb-12">
         <h2 className="text-3xl font-medium md:text-5xl font-bold text-gray-900 mb-8">
           What Our Guests Say At StayMeran
         </h2>
@@ -168,10 +168,14 @@ const TestimonySection = () => {
           <CarouselContent>
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index}>
-                <div className="p-1">
-                  <Card className="rounded-xl border-[1.9px] border-gray-200 bg-white">
-                    <CardContent className="flex flex-col justify-between p-8 h-[22rem]">
-                      <p className="text-lg text-neutral-700 leading-loose line-clamp-5">
+                <div className="">
+                  <Card className={cn("rounded-xl border-[1.9px] border-gray-200",
+                    testimonial.bgColor,
+                  )}>
+                    <CardContent className="flex flex-col justify-between p-5 h-[22rem]">
+                      <p className={cn("text-lg leading-loose line-clamp-5",
+                        testimonial.textColor
+                      )}>
                         {testimonial.text}
                       </p>
                       <div className="flex items-center justify-between mt-6">
@@ -200,8 +204,8 @@ const TestimonySection = () => {
               key={index}
               onClick={() => api?.scrollTo(index)}
               className={cn(
-                "h-2 w-2 rounded-full transition-all",
-                current === index ? "w-4 bg-gray-800" : "bg-gray-300"
+                "h-[3px] w-6  rounded-full transition-all",
+                current === index ? "bg-gray-800" : "bg-gray-300"
               )}
               aria-label={`Go to slide ${index + 1}`}
             />

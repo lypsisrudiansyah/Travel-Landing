@@ -24,7 +24,7 @@ const whyStayContent = [
   {
     title: "Rich Culture",
     description: "Explore historic castles, charming streets, and a vibrant local arts scene.",
-    image: "/assets/whyHere2.webp",
+    image: "/assets/whyHere11.webp",
     imageHint: "historic architecture",
   },
   {
@@ -36,7 +36,7 @@ const whyStayContent = [
   {
     title: "Wellness Relaxation",
     description: "Unwind and rejuvenate at world-class thermal spas and wellness retreats.",
-    image: "/assets/whyHere2.webp",
+    image: "/assets/whyHere3.webp?v=1",
     imageHint: "spa wellness",
   },
 ];
@@ -87,8 +87,8 @@ export function WhyHereSection() {
 
   return (
     // <section className="py-12 md:py-24 bg-[#F8FAFB]">
-    <section className="min-h-[calc(100vh-3rem)] w-full bg-[#F8FAFB]">
-      <div className="max-w-full md:mx-28 py-36">
+    <section className="md:min-h-[calc(100vh-3rem)] w-full bg-[#F8FAFB]">
+      <div className="max-w-full md:mx-28 py-12 md:py-36 px-4 md:px-0">
         <div className="text-left mb-12">
           <h2 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground">Why stay in Merano?</h2>
           <p className="mt-4 max-w-[87vw] text-base md:text-[1.3rem] font-light text-muted-foreground">
@@ -112,13 +112,13 @@ export function WhyHereSection() {
                  onClick={() => handleItemClick(index)}
                  aria-label="ItemWhyHereButton"
               >
-                  <h3 className={cn("text-3xl font-medium  text-left",
+                  <h3 className={cn("text-[24px] font-medium  text-left",
                     current === index ? 'text-foreground' : 'text-gray-400') 
                   }>{item.title}</h3>
                   <AnimatePresence mode="wait">
                     {current === index && (
                       <motion.p
-                        className="text-muted-foreground mt-2 text-left text-base md:text-[1.15rem] font-light"
+                        className="text-accent-foreground mt-2 text-left text-[16px] font-extralight"
                         variants={itemContentVariants}
                         initial="hidden"
                         animate="visible"

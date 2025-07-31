@@ -20,12 +20,12 @@ export function Footer() {
             Contact us for more details about your perfect stay in Merano.
           </h2>
           <div className="mt-8 flex flex-col md:flex-row gap-4 justify-left">
-            <Button variant="outline" aria-label="ButtonEmail" className="bg-transparent py-6 border-white/40 hover:bg-white/10 hover:border-white text-white rounded-full text-lg font-light">
+            <Button variant="outline" aria-label="ButtonEmail" className="bg-transparent justify-start md:justify-center py-6 border-white/40 hover:bg-white/10 hover:border-white text-white rounded-full text-lg font-light">
               {/* <Mail className="mr-2 " size={48} /> */}
               <Image src="/icons/mailIcon.png" className="mr-2" alt="Mail" width={24} height={24} />
               <span>Email: info@staymeran.com</span>
             </Button>
-            <Button variant="outline" aria-label="ButtonPhone" className="bg-transparent py-6 border-white/40 hover:bg-white/10 hover:border-white text-white rounded-full text-lg font-light">
+            <Button variant="outline" aria-label="ButtonPhone" className="bg-transparent justify-start md:justify-center py-6 border-white/40 hover:bg-white/10 hover:border-white text-white rounded-full text-lg font-light">
               <Image src="/icons/phoneIcon.png" className="mr-2" alt="phone" width={24} height={24} />
               <span>Phone: +39 123 456 7890</span>
             </Button>
