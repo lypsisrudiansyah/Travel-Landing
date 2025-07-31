@@ -37,7 +37,7 @@ export function AccomodationSection() {
   return (
     // <section className="relative bg-white h-[calc(100vh-3rem)] w-full">
     <section className="relative bg-white min-h-[calc(100vh-3rem)] w-full mt-12 md:mt-8 mb-16 md:mb-0">
-      <div className="px-3 md:px-24 pt-0 md:pt-16">
+      <div className="px-2 md:px-24 pt-0 md:pt-16">
         <div className="max- mx-auto mb-12">
           <h2 className="text-[32px] md:text-[44px] font-medium tracking-tight text-foreground text-left w-12/12 md:w-[66vw]">
             StayMeran offers a curated selection of three unique accommodations,

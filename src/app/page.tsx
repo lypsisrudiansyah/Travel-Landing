@@ -15,7 +15,7 @@ export default function Home() {
       <div id="our-stays" className="px-2 mb-5 md:mb-0 md:px-8 ">
         <AccomodationSection />
       </div>
-      <div id="why-merano" className="">
+      <div id="why-merano" className="px-0">
         <WhyHereSection />
       </div>
       <div id="about-us">

@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 export function FindPlanSection() {
   return (
-    <section className="py-12 md:py-24 bg-white">
+    <section className="py-12 md:py-24 bg-white mb-10 md:mb-0">
       <div className="container mx-auto px-4">
         <div className="relative h-[500px] w-full overflow-hidden rounded-xl">
           <Image
@@ -22,10 +22,10 @@ export function FindPlanSection() {
           <div className="absolute inset-0 bg-gradient-to-t from-gray-500/90 via-gray-400/60 to-transparent z-10" />
 
           <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white p-4">
-            <h2 className="text-2xl font-medium md:text-4xl leading-tight">
+            <h2 className="text-2xl font-medium md:text-[44px] leading-tight mb-4">
               Find Your Stay Plan <br /> Your Perfect Getaway
             </h2>
-            <p className="mt-4 max-w-[57vw] text-base font-normal text-white/90">
+            <p className="mt-4 max-w-[57vw] text-[16px] font-light text-white/90">
               Ready to experience Merano's charm? Discover availability and book your ideal accommodation today. Whether you're looking for a romantic escape, a cultural adventure, or a relaxing retreat, StayMeran has the perfect place for you.
             </p>
             <Button
