@@ -51,9 +51,9 @@ export function Footer({ data }: { data: LocalizedHomepage | null }) {
       variants={sectionVariants} // Apply sectionVariants for the footer animation
       className="bg-neutral-900 text-white px-4 md:px-28"
     >
-      <motion.div 
-      variants={itemVariants}
-      className="container py-12 md:py-20">
+      <motion.div
+        variants={itemVariants}
+        className="container py-12 md:py-20">
         <div className="text-left mb-16 md:mb-8">
           <motion.h2 variants={itemVariants} className="text-xl font-normal md:text-4xl tracking-tight">
             {data?.contact_us}

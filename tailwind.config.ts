@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+      'xl1440': '1400px',
+      'xl1920': '1800px',
+    },
       fontFamily: {
 //         'sans-serif'
 // 'sans-serif'

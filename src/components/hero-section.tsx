@@ -317,7 +317,7 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
                     </a>
                   ))}
                 </nav>
-                <div className="absolute -right-[80vw] lg:-right-[10vw]">
+                <div className="absolute -right-0 xl1440:right-0 xl1920:-right-24">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -710,7 +710,7 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
           onClick={() => api?.scrollPrev()}
         >
           <div className="absolute top-1/2 left-4 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-2xl pointer-events-none">
-            <ChevronLeft className="h-24 w-24" />
+            <ChevronLeft className="h-20 w-20" />
           </div>
         </div>
 
@@ -720,7 +720,7 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
           onClick={() => api?.scrollNext()}
         >
           <div className="absolute top-1/2 right-4 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-2xl pointer-events-none">
-            <ChevronRight className="mt-[0vh] h-24 w-24" />
+            <ChevronRight className="mt-[0vh] h-20 w-20" />
           </div>
         </div>
       </motion.section>
