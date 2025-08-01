@@ -1,8 +1,9 @@
 import { LocalizedString } from "./masterType"
 
 export interface Homepage {
+  hero_arrival: LocalizedString
+  hero_person: LocalizedString
   accomodation_title: LocalizedString
-  accomodation_subtitle: LocalizedString
   accomodation_start: LocalizedString
   accomodation_night: LocalizedString
 
@@ -22,12 +23,14 @@ export interface Homepage {
   }
 
   contact_us: LocalizedString
-  content_by: string
+//   content_by: string
 }
 
 export interface LocalizedHomepage {
+  hero_arrival: string
+  hero_person: string
   accomodation_title: string
-  accomodation_subtitle: string
+//   accomodation_subtitle: string
   accomodation_start: string
   accomodation_night: string
 
@@ -42,5 +45,4 @@ export interface LocalizedHomepage {
   find_plan_image: Homepage['find_plan_image']
 
   contact_us: string
-  content_by: string
 }

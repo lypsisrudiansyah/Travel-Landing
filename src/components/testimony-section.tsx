@@ -10,9 +10,10 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { LocalizedHomepage } from '@/types/homePageType';
 
 
-const TestimonySection = () => {
+const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
   const masonryContainer = useMasonry();
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
@@ -110,11 +111,11 @@ const TestimonySection = () => {
       {/* Header */}
       <div className="text-left md:text-center mb-6 md:mb-12">
         <h2 className="text-3xl font-medium md:text-5xl font-bold text-gray-900 mb-8">
-          What Our Guests Say At StayMeran
+          {data?.testimony_title}
         </h2>
         <p className="text-base font-light md:text-lg md:font-normal text-gray-600">
-          We take pride in providing an exceptional stay for our guests. See what they have to say about their experiences and why they choose to return.
-        </p>
+          {data?.testimony_description}
+         </p>
       </div>
 
       {/* Masonry Layout - Desktop */}

@@ -20,8 +20,10 @@ export const homepageService = {
 
 function localizeHomepage(data: Homepage, lang: Language): LocalizedHomepage {
   return {
+    hero_arrival: data.hero_arrival[lang],
+    hero_person: data.hero_person[lang],
     accomodation_title: data.accomodation_title[lang],
-    accomodation_subtitle: data.accomodation_subtitle[lang],
+    // accomodation_subtitle: data.accomodation_subtitle[lang],
     accomodation_start: data.accomodation_start[lang],
     accomodation_night: data.accomodation_night[lang],
 
@@ -36,6 +38,6 @@ function localizeHomepage(data: Homepage, lang: Language): LocalizedHomepage {
     find_plan_image: data.find_plan_image,
 
     contact_us: data.contact_us[lang],
-    content_by: data.content_by,
+    // content_by: data.content_by,
   }
 }

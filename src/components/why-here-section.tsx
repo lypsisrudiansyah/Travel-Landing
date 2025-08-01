@@ -12,6 +12,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
+import { LocalizedHomepage } from "@/types/homePageType";
 
 const whyStayContent = [
   {
@@ -41,7 +42,7 @@ const whyStayContent = [
   },
 ];
 
-export function WhyHereSection() {
+export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
 
@@ -90,9 +91,9 @@ export function WhyHereSection() {
     <section className="md:min-h-[calc(100vh-3rem)] w-full bg-[#F8FAFB]">
       <div className="max-w-full md:mx-28 py-12 md:py-36 px-4 md:px-0">
         <div className="text-left mb-12">
-          <h2 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground">Why stay in Merano?</h2>
+          <h2 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground">{data?.why_title}</h2>
           <p className="mt-4 max-w-[87vw] text-base md:text-[1.3rem] font-light text-muted-foreground">
-            Where Nature, Culture, and Relaxation Meet. Nestled in the heart of the Alps, Merano is a captivating town known for its picturesque landscapes, vibrant cultural scene, and renowned wellness experiences. Whether you're exploring historic streets, indulging in world-class cuisine, or unwinding in thermal spas, Merano has something for every traveler.
+            {data?.why_description}
           </p>
         </div>
 
