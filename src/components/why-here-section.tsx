@@ -13,8 +13,11 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { LocalizedHomepage } from "@/types/homePageType";
+import { useLanguage } from "@/contexts/language-context";
+import { LocalizedWhyStay } from "@/types/whyStayType";
+import { whyStayService } from "@/services/whyStayService";
 
-const whyStayContent = [
+const whyStayContent2 = [
   {
     title: "Breathtaking Nature",
     description: "Surrounded by majestic mountains, rolling vineyards, and scenic walking trails.",
@@ -45,6 +48,21 @@ const whyStayContent = [
 export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
+  const { language, setLanguage } = useLanguage();
+
+  const [whyStayContent, setWhyStayContent] = React.useState<LocalizedWhyStay[]>([])
+
+  React.useEffect(() => {
+    const fetchWhyStayContent = async () => {
+      const result = await whyStayService.getAllWhyStay(language)
+      setWhyStayContent(result)
+      console.log('Fetched Why Stay Content:', result)
+    }
+
+    fetchWhyStayContent()
+  }, [language])
+
+
 
   React.useEffect(() => {
     if (!api) {
@@ -139,11 +157,11 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
                   <CarouselItem key={index}>
                     <div className="relative w-full h-[488px] overflow-hidden rounded-lg -pr-24">
                       <Image
-                        src={content.image}
+                      src={content.image?.asset.url || 'assets/whyHere1.webp?v=3'}
+
                         alt={content.title}
                         fill
                         className="object-cover"
-                        data-ai-hint={content.imageHint}
                       />
                     </div>
                   </CarouselItem>
@@ -174,11 +192,11 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
                   <CarouselItem key={index}>
                     <div className="relative w-full h-[300px] overflow-hidden rounded-lg">
                       <Image
-                        src={content.image}
+                      src={content.image?.asset.url+"?v=1" || 'assets/whyHere1.webp?v=3'}
+
                         alt={content.title}
                         fill
                         className="object-cover"
-                        data-ai-hint={content.imageHint}
                       />
                     </div>
                   </CarouselItem>
@@ -196,8 +214,9 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
                 >
                   <Card className="bg-white rounded-lg shadow-sm">
                       <CardContent className="p-6">
-                        <h3 className="text-xl font-medium text-foreground">{whyStayContent[current].title}</h3>
-                        <p className="text-muted-foreground mt-2">{whyStayContent[current].description}</p>
+                        {/* {whyStayContent.findIndex} */}
+                        <h3 className="text-xl font-medium text-foreground">{whyStayContent.at(current)?.title ?? ""}</h3>
+                        <p className="text-muted-foreground mt-2">{whyStayContent.at(current)?.description ?? ""}</p>
                       </CardContent>
                   </Card>
                 </motion.div>
