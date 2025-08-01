@@ -89,9 +89,9 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
   return (
     // <section className="py-12 md:py-24 bg-[#F8FAFB]">
     <section className="md:min-h-[calc(100vh-3rem)] w-full bg-[#F8FAFB]">
-      <div className="max-w-full md:mx-28 py-12 md:py-36 px-4 md:px-0">
+      <div className="max-w-full md:mx-28 py-12 md:py-20 px-4 md:px-0">
         <div className="text-left mb-12">
-          <h2 className="text-4xl md:text-6xl font-medium tracking-tight text-foreground">{data?.why_title}</h2>
+          <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-foreground">{data?.why_title}</h2>
           <p className="mt-4 max-w-[87vw] text-base md:text-[1.3rem] font-light text-muted-foreground">
             {data?.why_description}
           </p>
