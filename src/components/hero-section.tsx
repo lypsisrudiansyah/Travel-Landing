@@ -607,7 +607,7 @@ export function HeroSection() {
                 key={index}
                 onClick={() => api?.scrollTo(index)}
                 className={cn(
-                  "h-1 w-8 rounded-full transition-colors hidden md:block",
+                  "h-1 w-6 rounded-full transition-colors hidden md:block",
                   current === index ? "bg-white" : "bg-white/30"
                 )}
                 aria-label={`Go to slide ${index + 1}`}
