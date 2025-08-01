@@ -105,7 +105,7 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
                 key={index}
                 className={cn(
                   "p-6 rounded-lg cursor-pointer transition-all duration-300",
-                  current === index ? "bg-white shadow-lg -ml-60 pl-60" : "bg-transparent -ml-[1.4vw]"
+                  current === index ? "bg-white  -ml-60 pl-60" : "bg-transparent -ml-[1.4vw]"
                 )}
                 variants={cardVariants}
                 animate={current === index ? "active" : "inactive"}

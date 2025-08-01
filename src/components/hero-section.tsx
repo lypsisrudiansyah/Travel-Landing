@@ -696,11 +696,11 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
 
         {/* Right click area with arrow */}
         <div
-          className="group hidden md:block absolute right-0 top-0 w-1/12 h-[85%] z-10 cursor-pointer"
+          className="group hidden md:block absolute right-0 top-[14vh] w-1/12 h-[70%] z-10 cursor-pointer"
           onClick={() => api?.scrollNext()}
         >
           <div className="absolute top-1/2 right-4 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-2xl pointer-events-none">
-            <ChevronRight className="mt-[18vh] h-24 w-24" />
+            <ChevronRight className="mt-[0vh] h-24 w-24" />
           </div>
         </div>
       </motion.section>

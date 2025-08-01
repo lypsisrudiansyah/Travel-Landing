@@ -5,8 +5,12 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { LocalizedHomepage } from "@/types/homePageType";
+import { accommodationService } from "@/services/accomodationService";
+import { useLanguage } from "@/contexts/language-context";
+import * as React from "react";
+import { LocalizedAccommodation } from "@/types/accomodationType";
 
-const accommodations = [
+const accommodations2 = [
   {
     title: "Helles Apartment in historischer Villa",
     description:
@@ -35,6 +39,21 @@ const accommodations = [
 ];
 
 export function AccomodationSection({ data }: { data: LocalizedHomepage | null }) {
+
+  const { language, setLanguage } = useLanguage();
+  const [accommodations, setAccommodations] = React.useState<LocalizedAccommodation[]>([]);
+
+  React.useEffect(() => {
+    const fetchAccommodations = async () => {
+      const accommodationsData = await accommodationService.getAllAccommodations(language);
+      setAccommodations(accommodationsData);
+      console.log("Fetched Accommodations:", accommodationsData);
+    };
+
+    fetchAccommodations();
+  }, [language]);
+
+  
   return (
     // <section className="relative bg-white h-[calc(100vh-3rem)] w-full">
     <section className="relative bg-white min-h-[calc(100vh-3rem)] w-full mt-12 md:mt-8 mb-16 md:mb-14">
@@ -46,19 +65,18 @@ export function AccomodationSection({ data }: { data: LocalizedHomepage | null }
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {accommodations.map((item, index) => (
+          {accommodations.map((item:any, index) => (
             <div key={index} className="flex flex-col gap-4">
               <div className="relative overflow-hidden rounded-lg">
                 <Image
-                  src={item.image}
+                  src={item.image?.asset?.url || 'assets/lptRoom1.webp?v=3'}
                   alt={item.title}
                   width={387}
                   height={409}
                   className="object-cover w-full h-full"
-                  data-ai-hint={item.imageHint}
                 />
                 <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-sm text-foreground text-sm font-medium px-3 py-1.5 rounded-md">
-                  {data?.accomodation_start} {item.price} / {data?.accomodation_night}
+                  {data?.accomodation_start} £{item.price} / {data?.accomodation_night}
                 </div>
               </div>
               <div className="flex flex-col flex-grow gap-2">
@@ -67,7 +85,7 @@ export function AccomodationSection({ data }: { data: LocalizedHomepage | null }
                     {item.title}
                   </h3>
                   <p className="text-black font-body text-[16px] md:text-base font-extralight mt-2 w-12/12 md:w-[28vw]">
-                    {item.description}
+                    {item.subtitle}
                   </p>
                 </div>
                 <Button

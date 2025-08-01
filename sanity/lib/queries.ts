@@ -50,6 +50,18 @@ export const heroSectionQuery = `*[_type == "heroSection"]{
   }
 }`;
 
+export const accomodationQuery = `*[_type == "accomodationSection"] | order(_createdAt asc){
+  title,
+  subtitle,
+  price,
+  image{
+    asset->{
+      _id,
+      url
+    }
+  },
+}`;
+
 // Get single portfolio by ID
 export const singlePortfolioQuery = groq`
   *[_type == "portfolio" && _id == $id][0] {
