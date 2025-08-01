@@ -26,7 +26,11 @@ export default function Home() {
   }, [language]);
 
   if (!homepage) {
-    return <div>Loading...</div>; // Show a loading state while fetching data
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-lg font-semibold">Loading...</div>
+      </div>
+    );
   }
 
   return (
