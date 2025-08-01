@@ -75,8 +75,8 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
 
     api.on("select", onSelect);
     // Sync carousel on init
-    onSelect(); 
-    
+    onSelect();
+
     return () => {
       api.off("select", onSelect);
     };
@@ -128,25 +128,25 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
                 variants={cardVariants}
                 animate={current === index ? "active" : "inactive"}
                 whileHover={{ opacity: 1 }}
-                 onClick={() => handleItemClick(index)}
-                 aria-label="ItemWhyHereButton"
+                onClick={() => handleItemClick(index)}
+                aria-label="ItemWhyHereButton"
               >
-                  <h3 className={cn("text-[24px] font-medium  text-left",
-                    current === index ? 'text-foreground' : 'text-gray-400') 
-                  }>{item.title}</h3>
-                  <AnimatePresence mode="wait">
-                    {current === index && (
-                      <motion.p
-                        className="text-accent-foreground mt-2 text-left text-[16px] font-extralight"
-                        variants={itemContentVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="hidden"
-                      >
-                        {item.description}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
+                <h3 className={cn("text-[24px] font-medium  text-left",
+                  current === index ? 'text-foreground' : 'text-gray-400')
+                }>{item.title}</h3>
+                <AnimatePresence mode="wait">
+                  {current === index && (
+                    <motion.p
+                      className="text-accent-foreground mt-2 text-left text-[16px] font-extralight"
+                      variants={itemContentVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                    >
+                      {item.description}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </motion.div>
             ))}
           </div>
@@ -157,8 +157,7 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
                   <CarouselItem key={index}>
                     <div className="relative w-full h-[488px] overflow-hidden rounded-lg -pr-24">
                       <Image
-                      src={content.image?.asset.url || 'assets/whyHere1.webp?v=3'}
-
+                        src={content.image?.asset.url || 'assets/whyHere1.webp?v=3'}
                         alt={content.title}
                         fill
                         className="object-cover"
@@ -186,55 +185,55 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
 
         {/* Mobile Layout */}
         <div className="md:hidden flex flex-col gap-6">
-           <Carousel setApi={setApi} className="w-full">
-              <CarouselContent>
-                {whyStayContent.map((content, index) => (
-                  <CarouselItem key={index}>
-                    <div className="relative w-full h-[300px] overflow-hidden rounded-lg">
-                      <Image
-                      src={content.image?.asset.url+"?v=1" || 'assets/whyHere1.webp?v=3'}
+          <Carousel setApi={setApi} className="w-full">
+            <CarouselContent>
+              {whyStayContent.map((content, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative w-full h-[300px] overflow-hidden rounded-lg">
+                    <Image
+                      src={content.image?.asset.url + "?v=1" || 'assets/whyHere1.webp?v=3'}
 
-                        alt={content.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
-
-            <AnimatePresence mode="wait">
-                <motion.div
-                  key={current}
-                  variants={itemContentVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                >
-                  <Card className="bg-white rounded-lg shadow-sm">
-                      <CardContent className="p-6">
-                        {/* {whyStayContent.findIndex} */}
-                        <h3 className="text-xl font-medium text-foreground">{whyStayContent.at(current)?.title ?? ""}</h3>
-                        <p className="text-muted-foreground mt-2">{whyStayContent.at(current)?.description ?? ""}</p>
-                      </CardContent>
-                  </Card>
-                </motion.div>
-            </AnimatePresence>
-
-            <div className="z-20 flex gap-2 justify-center">
-              {whyStayContent.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleItemClick(index)}
-                  className={cn(
-                    "h-1.5 w-8 rounded-full transition-colors",
-                    current === index ? "bg-foreground" : "bg-muted"
-                  )}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
+                      alt={content.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </CarouselItem>
               ))}
-            </div>
+            </CarouselContent>
+          </Carousel>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              variants={itemContentVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              <Card className="bg-white rounded-lg shadow-sm">
+                <CardContent className="p-6">
+                  {/* {whyStayContent.findIndex} */}
+                  <h3 className="text-xl font-medium text-foreground">{whyStayContent.at(current)?.title ?? ""}</h3>
+                  <p className="text-muted-foreground mt-2">{whyStayContent.at(current)?.description ?? ""}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="z-20 flex gap-2 justify-center">
+            {whyStayContent.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleItemClick(index)}
+                className={cn(
+                  "h-1.5 w-8 rounded-full transition-colors",
+                  current === index ? "bg-foreground" : "bg-muted"
+                )}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
