@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { LocalizedHomepage } from '@/types/homePageType';
+import { LocalizedTestimony } from '@/types/testimonyType';
+import { useLanguage } from '@/contexts/language-context';
+import { testimonyService } from '@/services/testimonyService';
 
 
 const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
@@ -29,7 +32,7 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
     });
   }, [api]);
 
-  const testimonials = [
+  const testimonials2 = [
     {
       name: "Sab",
       avatar: "https://placehold.co/64x64.png",
@@ -103,6 +106,20 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
     return columns;
   };
 
+  const { language } = useLanguage()
+  const [testimonials, setTestimonials] = React.useState<LocalizedTestimony[]>([])
+
+  
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const data = await testimonyService.getAllTestimonies(language)
+      setTestimonials(data)
+    }
+
+    fetchData()
+  }, [language])
+
+
   const columnPattern = [2, 3, 2]; // pola kolom 2-3-2
   const testimonialColumns = splitIntoCustomColumns(testimonials, columnPattern);
 
@@ -115,7 +132,7 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
         </h2>
         <p className="text-base font-light md:text-lg md:font-normal text-gray-600">
           {data?.testimony_description}
-         </p>
+        </p>
       </div>
 
       {/* Masonry Layout - Desktop */}
@@ -135,7 +152,7 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
                 )}
               >
                 <p className="text-lg font-light leading-[2.5]">
-                  {testimonial.text.split("\n").map((line: any, idx: any) => (
+                  {testimonial.text.split("\\n").map((line: any, idx: any) => (
                     <span key={idx}>
                       {line}
                       <br />
@@ -149,7 +166,8 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
                     )
                   }>{testimonial.name}</span>
                   <Image
-                    src={testimonial.avatar}
+                    // src={testimonial.avatar}
+                      src={testimonial.avatar?.asset.url || 'assets/union.png?v=3'}
                     alt={testimonial.name}
                     width={48}
                     height={48}
@@ -184,12 +202,11 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
                           testimonial.textColor
                         )}>{testimonial.name}</span>
                         <Image
-                          src={testimonial.avatar}
+                          src={testimonial.avatar?.asset.url || 'assets/union.png?v=3'}
                           alt={testimonial.name}
                           width={64}
                           height={64}
                           className="rounded-xl"
-                          data-ai-hint={testimonial.imageHint}
                         />
                       </div>
                     </CardContent>

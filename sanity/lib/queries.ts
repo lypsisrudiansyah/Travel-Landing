@@ -73,6 +73,20 @@ export const whyStayQuery = `*[_type == "whyStaySection"] | order(_createdAt asc
   }
 }`;
 
+export const testimonyQuery = `  *[_type == "testimonySection"] | order(_createdAt asc) {
+    name,
+    avatar {
+      asset -> {
+        _id,
+        url
+      }
+    },
+    text,
+    bgColor,
+    textColor
+  }
+`;
+
 // Get single portfolio by ID
 export const singlePortfolioQuery = groq`
   *[_type == "portfolio" && _id == $id][0] {

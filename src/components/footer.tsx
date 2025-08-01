@@ -11,8 +11,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Mail, Phone, Instagram, Globe, ChevronDown, Landmark } from "lucide-react";
 import { LocalizedHomepage } from "@/types/homePageType";
+import { useLanguage } from "@/contexts/language-context";
 
 export function Footer({ data }: { data: LocalizedHomepage | null }) {
+  const { language, setLanguage } = useLanguage();
+
   return (
     <footer className="bg-neutral-900 text-white px-4 md:px-28">
       <div className="container  py-12 md:py-20">
@@ -122,14 +125,37 @@ export function Footer({ data }: { data: LocalizedHomepage | null }) {
                   size="sm"
                   className="flex items-center gap-1 text-white/90 hover:bg-white/10 hover:text-white font-light text-base"
                 >
-                  <span>English (EN)</span>
+                  {/* <span>English (EN)</span> */}
+                  <span>
+                    {language === "en" && "English (EN)"}
+                    {language === "it" && "Italy (IT)"}
+                    {language === "de" && "German (DE)"}
+                  </span>
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="bg-neutral-900/90 border-white/20 text-white backdrop-blur-md">
-                <DropdownMenuItem className="hover:bg-neutral-700/80 focus:bg-neutral-700/80 font-light text-base">English (EN)</DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-neutral-700/80 focus:bg-neutral-700/80 font-light text-base">Italy (IT)</DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-neutral-700/80 focus:bg-neutral-700/80 font-light text-base">German (DE)</DropdownMenuItem>
+              <DropdownMenuContent
+                align="end"
+                className="bg-neutral-900/90 border-white/20 text-white backdrop-blur-md z-50"
+              >
+                <DropdownMenuItem
+                  onClick={() => setLanguage("en")}
+                  className="hover:bg-neutral-700/80 focus:bg-neutral-700/80 font-light text-base"
+                >
+                  English (EN)
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setLanguage("it")}
+                  className="hover:bg-neutral-700/80 focus:bg-neutral-700/80 font-light text-base"
+                >
+                  Italy (IT)
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setLanguage("de")}
+                  className="hover:bg-neutral-700/80 focus:bg-neutral-700/80 font-light text-base"
+                >
+                  German (DE)
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 

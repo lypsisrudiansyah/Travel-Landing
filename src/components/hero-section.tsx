@@ -140,12 +140,12 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
       const heroes = await heroService.getAllHeroes(language);
       setHeroContent(heroes);
       console.log("Fetched Hero Content:", heroes);
-      
+
     };
 
     fetchHeroContent();
   }, [language]);
-  
+
 
 
   React.useEffect(() => {
@@ -419,14 +419,34 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
                         <DropdownMenu >
                           <DropdownMenuTrigger asChild className="-mt-2">
                             <a className="flex items-center gap-2 font-body text-lg text-white/90 hover:text-white transition-colors cursor-pointer">
-                              <span>English (EN)</span>
+                              {/* <span>English (EN)</span> */}
+                              <span>
+                                {language === "en" && "English (EN)"}
+                                {language === "it" && "Italy (IT)"}
+                                {language === "de" && "German (DE)"}
+                              </span>
                               <Image src="/icons/globeIcon.png" alt="Globe" width={24} height={24} />
                             </a>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="start" className="bg-neutral-900/90 border-white/20 text-white backdrop-blur-md">
-                            <DropdownMenuItem className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white">English (EN)</DropdownMenuItem>
-                            <DropdownMenuItem className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white">Italy (IT)</DropdownMenuItem>
-                            <DropdownMenuItem className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white">German (DE)</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {
+                              setOpen(false);
+                              setTimeout(() => {
+                                setLanguage("en");
+                              }, 500);
+                            }} className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white">English (EN)</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {
+                              setOpen(false);
+                              setTimeout(() => {
+                                setLanguage("it");
+                              }, 500);
+                            }} className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white">Italy (IT)</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => {
+                              setOpen(false);
+                              setTimeout(() => {
+                                setLanguage("de");
+                              }, 500);
+                            }} className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white">German (DE)</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </div>
