@@ -62,6 +62,17 @@ export const accomodationQuery = `*[_type == "accomodationSection"] | order(_cre
   },
 }`;
 
+export const whyStayQuery = `*[_type == "whyStaySection"] | order(_createdAt asc) {
+  title,
+  description,
+  image {
+    asset->{
+      _id,
+      url
+    }
+  }
+}`;
+
 // Get single portfolio by ID
 export const singlePortfolioQuery = groq`
   *[_type == "portfolio" && _id == $id][0] {
