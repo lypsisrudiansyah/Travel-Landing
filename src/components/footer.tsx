@@ -216,6 +216,7 @@ export function Footer({ data }: { data: LocalizedHomepage | null }) {
             </DropdownMenu>
           </div>
         </div>
+        
       </motion.div>
     </motion.footer>
   );
