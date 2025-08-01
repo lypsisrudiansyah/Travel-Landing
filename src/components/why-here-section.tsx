@@ -104,20 +104,75 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
   };
 
 
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.7,
+        staggerChildren: 0.5, // Delay between children animations
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+        delay: 0.2, // Delay for button animation
+      },
+    },
+  };
+
   return (
     // <section className="py-12 md:py-24 bg-[#F8FAFB]">
-    <section className="md:min-h-[calc(100vh-3rem)] w-full bg-[#F8FAFB]">
-      <div className="max-w-full md:mx-28 py-12 md:py-20 px-4 md:px-0">
-        <div className="text-left mb-12">
+    <motion.section
+      initial="hidden"
+      whileInView="visible" // Animasi dimulai saat elemen terlihat di viewport
+      viewport={{ once: true, amount: 0.3 }} // Animasi hanya terjadi sekali, dengan 30% elemen terlihat
+      variants={containerVariants} // Use containerVariants for section animation
+      className="md:min-h-[calc(100vh-3rem)] w-full bg-[#F8FAFB]"
+    >
+      <motion.div
+        variants={itemVariants} // Use itemVariants for individual items
+        className="max-w-full md:mx-28 py-12 md:py-20 px-4 md:px-0"
+      >
+        <motion.div
+          variants={itemVariants} // Apply itemVariants to the title and description
+          className="text-left mb-12"
+        >
           <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-foreground">{data?.why_title}</h2>
           <p className="mt-4 max-w-[87vw] text-base md:text-[1.3rem] font-light text-muted-foreground">
             {data?.why_description}
           </p>
-        </div>
+        </motion.div>
 
         {/* Desktop Layout */}
-        <div className="hidden md:grid md:grid-cols-5 gap-12 items-center justify-center text-center">
-          <div className="md:col-span-2 flex flex-col gap-4">
+        <motion.div
+          variants={containerVariants} // Apply containerVariants to the grid layout
+          className="hidden md:grid md:grid-cols-5 gap-12 items-center justify-center text-center"
+        >
+          <motion.div
+            variants={itemVariants} // Apply itemVariants to each card
+            className="md:col-span-2 flex flex-col gap-4"
+          >
             {whyStayContent.map((item, index) => (
               <motion.div
                 key={index}
@@ -125,7 +180,7 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
                   "p-6 rounded-lg cursor-pointer transition-all duration-300",
                   current === index ? "bg-white  -ml-60 pl-60" : "bg-transparent -ml-[1.4vw]"
                 )}
-                variants={cardVariants}
+                variants={itemVariants}
                 animate={current === index ? "active" : "inactive"}
                 whileHover={{ opacity: 1 }}
                 onClick={() => handleItemClick(index)}
@@ -149,7 +204,7 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
                 </AnimatePresence>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div className="relative md:col-span-3 ml-4">
             <Carousel setApi={setApi} className="w-full">
               <CarouselContent>
@@ -181,7 +236,7 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Mobile Layout */}
         <div className="md:hidden flex flex-col gap-6">
@@ -235,7 +290,7 @@ export function WhyHereSection({ data }: { data: LocalizedHomepage | null }) {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </motion.div>
+    </motion.section>
   );
 }

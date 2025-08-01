@@ -60,8 +60,8 @@ export function AccomodationSection({ data }: { data: LocalizedHomepage | null }
       opacity: 1,
       scale: 1,
       transition: {
-        delayChildren: 0.5,
-        staggerChildren: 0.5, // Delay between children animations
+        delayChildren: 0.4,
+        staggerChildren: 0.4, // Delay between children animations
       },
     },
   };

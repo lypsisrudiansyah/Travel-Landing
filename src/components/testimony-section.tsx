@@ -1,4 +1,5 @@
 "use client"
+import { motion } from 'framer-motion';
 import React from 'react';
 import useMasonry from './useMasonry';
 import { cn } from '@/lib/utils';
@@ -109,7 +110,7 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
   const { language } = useLanguage()
   const [testimonials, setTestimonials] = React.useState<LocalizedTestimony[]>([])
 
-  
+
   React.useEffect(() => {
     const fetchData = async () => {
       const data = await testimonyService.getAllTestimonies(language)
@@ -122,6 +123,43 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
 
   const columnPattern = [2, 3, 2]; // pola kolom 2-3-2
   const testimonialColumns = splitIntoCustomColumns(testimonials, columnPattern);
+
+  // Add this new lines code into the top of testimony-section.tsx
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.5,
+        staggerChildren: 0.3, // Delay antara animasi anak
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const carouselItemVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
 
   return (
     <div className="py-12 md:py-24 mx-4 md:mx-28">
@@ -136,14 +174,21 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
       </div>
 
       {/* Masonry Layout - Desktop */}
-      <div
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={containerVariants}
         ref={masonryContainer}
         className="hidden md:grid items-start gap-4 sm:grid-cols-3 md:gap-6"
       >
         {testimonialColumns.map((column, colIndex) => (
-          <div key={colIndex} className="flex flex-col gap-6 w-full">
+          <motion.div key={colIndex} className="flex flex-col gap-6 w-full"
+            variants={itemVariants}
+          >
             {column.map((testimonial, index) => (
-              <div
+              <motion.div
+                variants={itemVariants}
                 key={index}
                 className={cn(
                   "p-6 rounded-lg break-inside-avoid-column border-[1.8px] border-gray-200",
@@ -167,7 +212,7 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
                   }>{testimonial.name}</span>
                   <Image
                     // src={testimonial.avatar}
-                      src={testimonial.avatar?.asset.url || 'assets/union.png?v=3'}
+                    src={testimonial.avatar?.asset.url || 'assets/union.png?v=3'}
                     alt={testimonial.name}
                     width={48}
                     height={48}
@@ -175,44 +220,51 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
                     data-ai-hint={testimonial.imageHint}
                   />
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Carousel Layout - Mobile */}
       <div className="md:hidden">
         <Carousel setApi={setApi} className="w-full max-w-md mx-auto">
           <CarouselContent>
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index}>
-                <div className="">
-                  <Card className={cn("rounded-xl border-[1.9px] border-gray-200",
-                    testimonial.bgColor,
-                  )}>
-                    <CardContent className="flex flex-col justify-between p-5 h-[22rem]">
-                      <p className={cn("text-lg leading-loose line-clamp-5",
-                        testimonial.textColor
-                      )}>
-                        {testimonial.text}
-                      </p>
-                      <div className="flex items-center justify-between mt-6">
-                        <span className={cn("text-lg font-medium",
+              <motion.div
+                key={index}
+                initial="hidden"
+                animate="visible"
+                variants={carouselItemVariants} // Apply carouselItemVariants for carousel animation
+              >
+                <CarouselItem key={index}>
+                  <div className="">
+                    <Card className={cn("rounded-xl border-[1.9px] border-gray-200",
+                      testimonial.bgColor,
+                    )}>
+                      <CardContent className="flex flex-col justify-between p-5 h-[22rem]">
+                        <p className={cn("text-lg leading-loose line-clamp-5",
                           testimonial.textColor
-                        )}>{testimonial.name}</span>
-                        <Image
-                          src={testimonial.avatar?.asset.url || 'assets/union.png?v=3'}
-                          alt={testimonial.name}
-                          width={64}
-                          height={64}
-                          className="rounded-xl"
-                        />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
+                        )}>
+                          {testimonial.text}
+                        </p>
+                        <div className="flex items-center justify-between mt-6">
+                          <span className={cn("text-lg font-medium",
+                            testimonial.textColor
+                          )}>{testimonial.name}</span>
+                          <Image
+                            src={testimonial.avatar?.asset.url || 'assets/union.png?v=3'}
+                            alt={testimonial.name}
+                            width={64}
+                            height={64}
+                            className="rounded-xl"
+                          />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              </motion.div>
             ))}
           </CarouselContent>
         </Carousel>
