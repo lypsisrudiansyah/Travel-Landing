@@ -45,7 +45,7 @@ export function AccomodationSection({ data }: { data: LocalizedHomepage | null }
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {accommodations.map((item, index) => (
             <div key={index} className="flex flex-col gap-4">
               <div className="relative overflow-hidden rounded-lg">

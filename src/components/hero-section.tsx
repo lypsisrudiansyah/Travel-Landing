@@ -65,6 +65,8 @@ import {
 import { StaggeredFadeText } from "./ui/staggered-fade";
 import { LocalizedHomepage } from "@/types/homePageType";
 import { useLanguage } from "@/contexts/language-context";
+import { LocalizedHeroSection } from "@/types/heroSectionType";
+import { heroService } from "@/services/heroService";
 
 const searchFormSchema = z.object({
   dates: z.object({
@@ -76,7 +78,7 @@ const searchFormSchema = z.object({
 
 type SearchFormValues = z.infer<typeof searchFormSchema>;
 
-const heroContent = [
+const heroContent2 = [
   {
     subtitle: "STAY MERAN",
     title: "Three Unique Stays in the Heart of Merano",
@@ -129,6 +131,23 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
   const [date, setDate] = React.useState<DateRange | undefined>();
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
+  const { language, setLanguage } = useLanguage();
+
+  const [heroContent, setHeroContent] = React.useState<LocalizedHeroSection[]>([]);
+
+  React.useEffect(() => {
+    const fetchHeroContent = async () => {
+      const heroes = await heroService.getAllHeroes(language);
+      setHeroContent(heroes);
+      console.log("Fetched Hero Content:", heroes);
+      
+    };
+
+    fetchHeroContent();
+  }, [language]);
+  
+
+
   React.useEffect(() => {
     if (!api) {
       return;
@@ -197,8 +216,6 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
     }
   };
 
-  const { language, setLanguage } = useLanguage(); // Access language context
-
   return (
     <>
       <motion.section
@@ -233,12 +250,11 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
                 className="relative sm:h-screen h-[145vh]"
               >
                 <Image
-                  src={content.image}
+                  src={content.image?.asset.url || 'assets/hero1.webp?v=3'}
                   alt={content.subtitle}
                   fill
                   style={{ objectFit: 'cover' }}
                   priority={index === 0}
-                  data-ai-hint={content.imageHint}
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />

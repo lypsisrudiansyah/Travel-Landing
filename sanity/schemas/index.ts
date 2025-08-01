@@ -1,5 +1,9 @@
-import homePageTypes from "./homePageSchema";
+import accomodationSchema from "./accomodationSchema";
+import heroSchema from "./heroSchema";
+import homePageSchema from "./homePageSchema";
 
 export const schemaTypes = [
-    homePageTypes
+    homePageSchema,
+    heroSchema,
+    accomodationSchema,
 ];
