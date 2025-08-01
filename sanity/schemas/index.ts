@@ -1,4 +1,4 @@
-import homePageTypes from "./homePageTypes";
+import homePageTypes from "./homePageSchema";
 
 export const schemaTypes = [
     homePageTypes

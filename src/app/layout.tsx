@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Footer } from '@/components/footer';
+import { LanguageProvider  } from "@/contexts/language-context";
 
 export const metadata: Metadata = {
   title: 'Travel Landing',
@@ -24,7 +25,9 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
+        <LanguageProvider>
         {children}
+        </LanguageProvider>
         {/* <Footer /> */}
       </body>
     </html>

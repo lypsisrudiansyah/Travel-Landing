@@ -4,6 +4,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { LocalizedHomepage } from "@/types/homePageType";
 
 const accommodations = [
   {
@@ -33,15 +34,14 @@ const accommodations = [
   },
 ];
 
-export function AccomodationSection() {
+export function AccomodationSection({ data }: { data: LocalizedHomepage | null }) {
   return (
     // <section className="relative bg-white h-[calc(100vh-3rem)] w-full">
-    <section className="relative bg-white min-h-[calc(100vh-3rem)] w-full mt-12 md:mt-8 mb-16 md:mb-0">
+    <section className="relative bg-white min-h-[calc(100vh-3rem)] w-full mt-12 md:mt-8 mb-16 md:mb-14">
       <div className="px-2 md:px-24 pt-0 md:pt-16">
         <div className="max- mx-auto mb-12">
           <h2 className="text-[32px] md:text-[44px] font-medium tracking-tight text-foreground text-left w-12/12 md:w-[66vw]">
-            StayMeran offers a curated selection of three unique accommodations,
-            each designed to provide an unforgettable stay in Merano.
+            {data?.accomodation_title}
           </h2>
         </div>
 
@@ -58,7 +58,7 @@ export function AccomodationSection() {
                   data-ai-hint={item.imageHint}
                 />
                 <div className="absolute bottom-4 left-4 bg-white/80 backdrop-blur-sm text-foreground text-sm font-medium px-3 py-1.5 rounded-md">
-                  Start from {item.price} / night
+                  {data?.accomodation_start} {item.price} / {data?.accomodation_night}
                 </div>
               </div>
               <div className="flex flex-col flex-grow gap-2">
