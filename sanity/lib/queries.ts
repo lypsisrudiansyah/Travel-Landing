@@ -2,6 +2,8 @@ import { groq } from 'next-sanity'
 
 // Base portfolio query - gets all portfolios with multilingual content
 export const homepageQuery = `*[_type == "homepage"][0] {
+  hero_arrival,
+  hero_person,
   accomodation_title,
   accomodation_subtitle,
   accomodation_start,
@@ -28,8 +30,37 @@ export const homepageQuery = `*[_type == "homepage"][0] {
   },
 
   contact_us,
-  content_by
 }`
+/* 
+{
+  accomodation_title,
+  accomodation_subtitle,
+  accomodation_start,
+  accomodation_night,
+
+  why_title,
+  why_description,
+
+  testimony_title,
+  testimony_description,
+
+  find_plan_title,
+  find_plan_description,
+  find_plan_image {
+    asset->{
+      _id,
+      url,
+      metadata {
+        dimensions,
+        lqip,
+        hotspot
+      }
+    }
+  },
+
+  contact_us,
+}
+*/
 
 // Get single portfolio by ID
 export const singlePortfolioQuery = groq`

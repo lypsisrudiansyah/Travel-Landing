@@ -5,6 +5,26 @@ export default defineType({
     title: 'Home Page',
     type: 'document',
     fields: [
+        defineField({
+            name: 'hero_arrival',
+            title: 'Hero Arrival',
+            type: 'object',
+            fields: [
+                defineField({ name: 'en', title: 'English', type: 'string' }),
+                defineField({ name: 'it', title: 'Italian', type: 'string' }),
+                defineField({ name: 'de', title: 'German', type: 'string' }),
+            ],
+        }),
+        defineField({
+            name: 'hero_person',
+            title: 'Hero Person',
+            type: 'object',
+            fields: [
+                defineField({ name: 'en', title: 'English', type: 'string' }),
+                defineField({ name: 'it', title: 'Italian', type: 'string' }),
+                defineField({ name: 'de', title: 'German', type: 'string' }),
+            ],
+        }),
         // Accomodation Section
         defineField({
             name: 'accomodation_title',
