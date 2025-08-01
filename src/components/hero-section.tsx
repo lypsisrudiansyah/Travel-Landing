@@ -651,7 +651,7 @@ export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
                         <FormLabel className="text-black">Person</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="select-trigger h-12">
+                            <SelectTrigger className="select-trigger h-12 rounded-xl">
                               <div className="flex items-center gap-2 font-light text-gray-600">
                                 <Image src="/icons/personIcon.png" className="mr-2" alt="iconPeople" width={24} height={24} />
                                 <SelectValue placeholder="0 Person" />
