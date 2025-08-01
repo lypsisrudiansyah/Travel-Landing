@@ -231,12 +231,6 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
         <Carousel setApi={setApi} className="w-full max-w-md mx-auto">
           <CarouselContent>
             {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial="hidden"
-                animate="visible"
-                variants={carouselItemVariants} // Apply carouselItemVariants for carousel animation
-              >
                 <CarouselItem key={index}>
                   <div className="">
                     <Card className={cn("rounded-xl border-[1.9px] border-gray-200",
@@ -264,7 +258,6 @@ const TestimonySection = ({ data }: { data: LocalizedHomepage | null }) => {
                     </Card>
                   </div>
                 </CarouselItem>
-              </motion.div>
             ))}
           </CarouselContent>
         </Carousel>
