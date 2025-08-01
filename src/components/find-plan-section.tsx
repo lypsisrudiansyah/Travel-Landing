@@ -4,14 +4,15 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { LocalizedHomepage } from "@/types/homePageType";
 
-export function FindPlanSection() {
+export function FindPlanSection({ data }: { data: LocalizedHomepage | null }) {
   return (
-    <section className="py-12 md:py-24 bg-white mb-10 md:mb-0">
-      <div className="container mx-auto px-4">
+    <section className="py-12 md:py-24 bg-white mb-10 md:mb-0 px-0">
+      <div className="px-4 md:px-28">
         <div className="relative h-[500px] w-full overflow-hidden rounded-xl">
           <Image
-            src="https://images.unsplash.com/photo-1672729908506-efeac8ded7ee?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src={data?.find_plan_image.asset.url || 'assets/hero2.webp'}
             alt="Misty mountains"
             layout="fill"
             objectFit="cover"
@@ -23,10 +24,10 @@ export function FindPlanSection() {
 
           <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white p-4">
             <h2 className="text-2xl font-medium md:text-[44px] leading-tight mb-4">
-              Find Your Stay Plan <br /> Your Perfect Getaway
+              {data?.find_plan_title}
             </h2>
             <p className="mt-4 max-w-[57vw] text-[16px] font-light text-white/90">
-              Ready to experience Merano's charm? Discover availability and book your ideal accommodation today. Whether you're looking for a romantic escape, a cultural adventure, or a relaxing retreat, StayMeran has the perfect place for you.
+              {data?.find_plan_description}
             </p>
             <Button
               variant="default"

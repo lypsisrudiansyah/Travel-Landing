@@ -63,6 +63,8 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { StaggeredFadeText } from "./ui/staggered-fade";
+import { LocalizedHomepage } from "@/types/homePageType";
+import { useLanguage } from "@/contexts/language-context";
 
 const searchFormSchema = z.object({
   dates: z.object({
@@ -117,12 +119,16 @@ const navLinks = [
 ];
 
 
-export function HeroSection() {
+export function HeroSection({ data }: { data: LocalizedHomepage | null }) {
+  console.log("Accomodation Night:", data?.accomodation_night);
+  console.log("Accomodation Title:", data?.accomodation_title);
+  console.log("arrival:", data?.hero_arrival);
+
+
   const [open, setOpen] = React.useState(false);
   const [date, setDate] = React.useState<DateRange | undefined>();
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
-
   React.useEffect(() => {
     if (!api) {
       return;
@@ -190,6 +196,9 @@ export function HeroSection() {
       api?.scrollPrev();
     }
   };
+
+  const { language, setLanguage } = useLanguage(); // Access language context
+
   return (
     <>
       <motion.section
@@ -292,7 +301,7 @@ export function HeroSection() {
                     </a>
                   ))}
                 </nav>
-                <div className="absolute -right-[10vw]">
+                <div className="absolute -right-[80vw] lg:-right-[10vw]">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
@@ -302,14 +311,46 @@ export function HeroSection() {
                       >
                         {/* <Globe className="h-4 w-4" /> */}
                         <Image src="/icons/globeIcon.png" className="mr-2 mb-1" alt="Globe" width={30} height={30} />
-                        <span>English (EN)</span>
+                        {/* <span>English (EN)</span> */}
+                        <span>
+                          {language === "en" && "English (EN)"}
+                          {language === "it" && "Italy (IT)"}
+                          {language === "de" && "German (DE)"}
+                        </span>
                         <ChevronDown className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="bg-neutral-900/90 border-white/20 text-white backdrop-blur-md font-normal text-base">
-                      <DropdownMenuItem className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 bg:text-white focus:text-white font-normal text-base">English (EN)</DropdownMenuItem>
-                      <DropdownMenuItem className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 bg:text-white focus:text-white font-normal text-base">Italy (IT)</DropdownMenuItem>
-                      <DropdownMenuItem className="hover:bg-neutral-700/100 focus:bg-neutral-700/100 bg:text-white focus:text-white font-normal text-base">German (DE)</DropdownMenuItem>
+                    <DropdownMenuContent
+                      align="end"
+                      className="bg-neutral-900/90 border-white/20 text-white backdrop-blur-md font-normal text-base"
+                    >
+                      <DropdownMenuItem
+                        onClick={() => setLanguage("en")} // Change language to English
+                        className={cn(
+                          "hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white font-normal text-base",
+                          language === "en" && "bg-neutral-700/100" // Highlight active language
+                        )}
+                      >
+                        English (EN)
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => setLanguage("it")} // Change language to Italian
+                        className={cn(
+                          "hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white font-normal text-base",
+                          language === "it" && "bg-neutral-700/100" // Highlight active language
+                        )}
+                      >
+                        Italy (IT)
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => setLanguage("de")} // Change language to German
+                        className={cn(
+                          "hover:bg-neutral-700/100 focus:bg-neutral-700/100 text-white font-normal text-base",
+                          language === "de" && "bg-neutral-700/100" // Highlight active language
+                        )}
+                      >
+                        German (DE)
+                      </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
@@ -406,8 +447,8 @@ export function HeroSection() {
             >
               <Form {...form}>
                 <div className="grid md:grid-cols-2 gap-x-4 gap-y-2 mb-2 px-4">
-                  <label className="text-white text-left text-base font-normal">Arrival & Departure</label>
-                  <label className="text-white text-left text-base font-normal">Person</label>
+                  <label className="text-white text-left text-base font-normal">{data?.hero_arrival}</label>
+                  <label className="text-white text-left text-base font-normal">{data?.hero_person}</label>
                 </div>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}

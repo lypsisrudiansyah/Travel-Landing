@@ -10,14 +10,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Mail, Phone, Instagram, Globe, ChevronDown, Landmark } from "lucide-react";
+import { LocalizedHomepage } from "@/types/homePageType";
 
-export function Footer() {
+export function Footer({ data }: { data: LocalizedHomepage | null }) {
   return (
     <footer className="bg-neutral-900 text-white px-4 md:px-28">
       <div className="container  py-12 md:py-20">
-        <div className="  text-left mb-16">
+        <div className="text-left mb-16 md:mb-8">
           <h2 className="text-xl font-normal md:text-4xl tracking-tight">
-            Contact us for more details about your perfect stay in Merano.
+            {data?.contact_us}
           </h2>
           <div className="mt-8 flex flex-col md:flex-row gap-4 justify-left">
             <Button variant="outline" aria-label="ButtonEmail" className="bg-transparent justify-start md:justify-center py-6 border-white/40 hover:bg-white/10 hover:border-white text-white rounded-full text-lg font-light">
