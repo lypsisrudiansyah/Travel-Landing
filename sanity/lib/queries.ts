@@ -8,6 +8,7 @@ export const homepageQuery = `*[_type == "homepage"][0] {
   accomodation_subtitle,
   accomodation_start,
   accomodation_night,
+  accomodation_discover,
 
   why_title,
   why_description,
@@ -31,22 +32,12 @@ export const homepageQuery = `*[_type == "homepage"][0] {
 
   contact_us,
 }`
-/* 
-{
-  accomodation_title,
-  accomodation_subtitle,
-  accomodation_start,
-  accomodation_night,
 
-  why_title,
-  why_description,
-
-  testimony_title,
-  testimony_description,
-
-  find_plan_title,
-  find_plan_description,
-  find_plan_image {
+export const heroSectionQuery = `*[_type == "heroSection"]{
+  _id,
+  title,
+  subtitle,
+  image {
     asset->{
       _id,
       url,
@@ -56,11 +47,8 @@ export const homepageQuery = `*[_type == "homepage"][0] {
         hotspot
       }
     }
-  },
-
-  contact_us,
-}
-*/
+  }
+}`;
 
 // Get single portfolio by ID
 export const singlePortfolioQuery = groq`

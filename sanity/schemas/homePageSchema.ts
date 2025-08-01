@@ -56,6 +56,16 @@ export default defineType({
                 defineField({ name: 'de', title: 'German', type: 'string' }),
             ],
         }),
+        defineField({
+            name: 'accomodation_discover_text',
+            title: 'Discover Text',
+            type: 'object',
+            fields: [
+                defineField({ name: 'en', title: 'English', type: 'string' }),
+                defineField({ name: 'it', title: 'Italian', type: 'string' }),
+                defineField({ name: 'de', title: 'German', type: 'string' }),
+            ],
+        }),
 
         // Why Here Section
         defineField({
@@ -141,4 +151,17 @@ export default defineType({
             ],
         }),
     ],
+    preview: {
+        select: {
+            title: 'hero_arrival.en', // Atau pilih yang kamu anggap paling representatif
+            subtitle: 'hero_person.en',
+        },
+        prepare(selection) {
+            return {
+                title: `Hero: ${selection.title || 'No Title'}`,
+                subtitle: `Person: ${selection.subtitle || 'No Person'}`
+            }
+        }
+    }
+
 })

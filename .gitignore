@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+/docs/blueprint2.md
 
 # production
 /build
