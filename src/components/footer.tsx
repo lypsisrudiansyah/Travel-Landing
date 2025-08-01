@@ -1,6 +1,7 @@
 
 "use client";
 
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,13 +17,47 @@ import { useLanguage } from "@/contexts/language-context";
 export function Footer({ data }: { data: LocalizedHomepage | null }) {
   const { language, setLanguage } = useLanguage();
 
+
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        staggerChildren: 0.3, // Delay between children animations
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
-    <footer className="bg-neutral-900 text-white px-4 md:px-28">
-      <div className="container  py-12 md:py-20">
+    <motion.footer
+      initial="hidden"
+      whileInView="visible" // Animasi dimulai saat elemen terlihat di viewport
+      viewport={{ once: true, amount: 0.3 }} // Animasi hanya terjadi sekali, dengan 30% elemen terlihat
+      variants={sectionVariants} // Apply sectionVariants for the footer animation
+      className="bg-neutral-900 text-white px-4 md:px-28"
+    >
+      <motion.div 
+      variants={itemVariants}
+      className="container py-12 md:py-20">
         <div className="text-left mb-16 md:mb-8">
-          <h2 className="text-xl font-normal md:text-4xl tracking-tight">
+          <motion.h2 variants={itemVariants} className="text-xl font-normal md:text-4xl tracking-tight">
             {data?.contact_us}
-          </h2>
+          </motion.h2>
           <div className="mt-8 flex flex-col md:flex-row gap-4 justify-left">
             <Button variant="outline" aria-label="ButtonEmail" className="bg-transparent justify-start md:justify-center py-6 border-white/40 hover:bg-white/10 hover:border-white text-white rounded-full text-lg font-light">
               {/* <Mail className="mr-2 " size={48} /> */}
@@ -181,7 +216,7 @@ export function Footer({ data }: { data: LocalizedHomepage | null }) {
             </DropdownMenu>
           </div>
         </div>
-      </div>
-    </footer>
+      </motion.div>
+    </motion.footer>
   );
 }

@@ -1,14 +1,34 @@
 
 "use client";
 
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { LocalizedHomepage } from "@/types/homePageType";
 
 export function FindPlanSection({ data }: { data: LocalizedHomepage | null }) {
+  const growVariants = {
+    hidden: { scale: 0.5, y: -100, opacity: 0 },
+    visible: {
+      scale: 1,
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
-    <section className="py-12 md:py-24 bg-white mb-10 md:mb-0 px-0">
+    <motion.section
+      initial="hidden"
+      whileInView="visible" // Animasi dimulai saat elemen terlihat di viewport
+      viewport={{ once: true, amount: 0.3 }} // Animasi hanya terjadi sekali, dengan 30% elemen terlihat
+      variants={growVariants} // Apply growVariants for growing animation
+      className="py-12 md:py-24 bg-white mb-10 md:mb-0 px-0"
+    >
       <div className="px-4 md:px-28">
         <div className="relative h-[500px] w-full overflow-hidden rounded-xl">
           <Image
@@ -41,6 +61,6 @@ export function FindPlanSection({ data }: { data: LocalizedHomepage | null }) {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
